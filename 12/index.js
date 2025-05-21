@@ -80,3 +80,85 @@ console.log(keyss);
 
 const valuess = Object.values(amigoUno);
 console.log(valuess);
+
+const entreess = Object.entries(amigoUno);
+console.log(entreess);
+
+// Create object from Map like array or plain array
+const entries = [
+  ["name", "Sasa"],
+  ["Age", 66],
+];
+const objFromEntrees = Object.fromEntries(entries);
+console.log(objFromEntrees);
+
+const source = { a: 1, b: 2, e: { inner: 1 } };
+const target = { c: 3, d: 4 };
+
+// Shallow clone of an object
+const newObj = Object.assign(target, source);
+console.log(newObj === target);
+
+// Deep clone of an object
+const deepObj = structuredClone(newObj);
+console.log(deepObj === newObj);
+
+// Freeze method, will freeze everything
+Object.freeze(objFromEntrees);
+Object.isFrozen(objFromEntrees); // true/false
+
+// Object.seal will permit reassigning of properties but will not allow adding new or removing old ones.
+Object.seal(objFromEntrees);
+Object.isSealed(objFromEntrees); // true/false
+
+// Object.hasOwn() return true or false if propertu exist
+Object.hasOwn(objFromEntrees, "name");
+
+// Destructuring
+const myObj1 = {
+  names: "Sasa",
+  age: 34,
+  address: {
+    cp: 23990,
+  },
+};
+
+const {
+  age, // Plain one
+  names: nombres, // Aliases on destructuring
+  address: { cp }, // Nested destructuring
+  member = false, // Adding new property is possible inside destructuring
+} = myObj1;
+
+console.log(nombres, cp, member, age);
+
+// Destructuring in function paramaters
+function getZipCode({ address: { cp } }) {
+  console.log(cp);
+}
+getZipCode(myObj1);
+
+// Destructuring as function return
+function sasa() {
+  return {
+    nombre: "Sasavic",
+  };
+}
+const { nombre: miNombre } = sasa();
+console.log(miNombre);
+
+// Destructuring in loop
+
+const students = [
+  { name: "Sasa", age: 34 },
+  { name: "Sasavko", age: 24 },
+  { name: "Saaaaasa", age: 56 },
+];
+
+for (let { name, age } of students) {
+  console.log(name, age);
+}
+
+// Optional chaining
+// console.log(myObj1.addresses.huhu); // Adresses does not exist
+console.log(myObj1.addresses?.huhu);
