@@ -162,3 +162,18 @@ for (let { name, age } of students) {
 // Optional chaining
 // console.log(myObj1.addresses.huhu); // Adresses does not exist
 console.log(myObj1.addresses?.huhu);
+
+// -----tasks
+
+const student = {
+  name: "Sasa",
+  age: 23,
+  grades: [3, 5, 7, 6, 8, 7, 9, 4],
+  mediumGrade: function () {
+    let sum = 0;
+    this.grades.forEach((grade) => (sum += grade));
+    return sum;
+  },
+};
+
+console.log(student.mediumGrade());
