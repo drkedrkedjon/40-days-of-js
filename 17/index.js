@@ -26,3 +26,4 @@ function searchFunction() {
         : "none")
   );
 }
+// iterate over node list and on all node elements change display property based on condition be true. the condition is that input.value contains string that exist in element.textContent
