@@ -1,20 +1,67 @@
 "use strict";
-// const container = document.querySelector(".faq");
-// const answers = document.querySelectorAll(".answer");
 
-// function hideAnswers() {
-//   answers.forEach((answer) => answer.classList.remove("show"));
-// }
+const tabBar = document.querySelector("#tab-bar");
+const tabBarBtn = tabBar.querySelectorAll("button");
+tabBar.addEventListener("click", handleTabClick);
+const allTabsContent = document.querySelectorAll(".tab-content");
 
-// function handleClickItem(e) {
-//   // hideAnswers();
-//   if (e.target.classList.contains("question")) {
-//     e.stopPropagation();
-//     const currentItem = e.target.parentElement;
-//     const currentAnswer = currentItem.querySelector(".answer");
-//     currentAnswer.classList.toggle("show");
-//   }
-// }
-// container.addEventListener("click", handleClickItem);
+function deselectAllBtn() {
+  tabBarBtn.forEach((btn) => {
+    if (btn.classList.contains("selected")) {
+      btn.classList.remove("selected");
+    }
+  });
+}
 
-// document.addEventListener("click", hideAnswers);
+function hideAllTabsContent() {
+  allTabsContent.forEach((tab) => {
+    if (tab.classList.contains("show")) {
+      tab.classList.remove("show");
+    }
+  });
+}
+
+function handleTabClick(e) {
+  const targetBtn = e.target.id;
+  deselectAllBtn();
+  hideAllTabsContent();
+
+  switch (targetBtn) {
+    case "btn1":
+      allTabsContent.forEach((tabCont) => {
+        if (tabCont.id === "tab1") {
+          tabCont.classList.add("show");
+        }
+      });
+      tabBarBtn.forEach((btn) => {
+        if (btn.id === "btn1") {
+          btn.classList.add("selected");
+        }
+      });
+      break;
+    case "btn2":
+      allTabsContent.forEach((tabCont) => {
+        if (tabCont.id === "tab2") {
+          tabCont.classList.add("show");
+        }
+      });
+      tabBarBtn.forEach((btn) => {
+        if (btn.id === "btn2") {
+          btn.classList.add("selected");
+        }
+      });
+      break;
+    case "btn3":
+      allTabsContent.forEach((tabCont) => {
+        if (tabCont.id === "tab3") {
+          tabCont.classList.add("show");
+        }
+      });
+      tabBarBtn.forEach((btn) => {
+        if (btn.id === "btn3") {
+          btn.classList.add("selected");
+        }
+      });
+      break;
+  }
+}
