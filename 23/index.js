@@ -96,3 +96,92 @@ Promise.race([promise, promise2])
   .catch((err) => {
     console.log("Race rejected:", err);
   });
+
+// You can not cancel the promisse as it is like made in past, what you can cancel is returning value. You can cancel fetch() but not a promise...
+
+// Tasks
+
+// 1
+const prom1 = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve("Hello, Promises");
+  }, 2000);
+});
+prom1.then((res) => console.log(res));
+
+// 2
+const prom2 = new Promise((resolve, reject) => {
+  reject("Algo va mal");
+});
+prom2.then(() => {}).catch((err) => console.error(err));
+
+// 3
+const prom3 = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    const randomNum = Math.random();
+
+    if (randomNum < 0.5) {
+      resolve("Heads");
+    } else {
+      resolve("Tails");
+    }
+  }, 3000);
+});
+prom3.then((res) => console.log(res));
+
+// 4
+function checkAge(age) {
+  return new Promise((resolve, reject) => {
+    if (age >= 18) {
+      resolve("Ok");
+    } else {
+      reject("Too young");
+    }
+  });
+}
+console.log(
+  checkAge(55)
+    .then((res) => console.log(res))
+    .catch((err) => console.error(err))
+);
+
+// 5
+
+const prom4 = new Promise((resolve, reject) => {
+  resolve("Step 1 done");
+});
+const prom5 = new Promise((resolve, reject) => {
+  resolve("Step 2 done");
+});
+const prom6 = new Promise((resolve, reject) => {
+  resolve("Step 3 done");
+});
+
+prom4
+  .then((res) => {
+    console.log(res);
+    return prom5;
+  })
+  .then((res) => {
+    console.log(res);
+    return prom6;
+  })
+  .then((res) => {
+    console.log(res);
+  });
+
+// 6
+const prom7 = new Promise((resolve, reject) => {
+  resolve(5);
+});
+
+prom7
+  .then((res) => {
+    return res * 2;
+  })
+  .then((res) => {
+    return res * res;
+  })
+  .then((res) => {
+    console.log(res);
+  });
