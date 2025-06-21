@@ -6,7 +6,7 @@
 // There is also promise result (what promise returns): (pending), value(resolve) or error(reject)
 
 const promise = new Promise((resolve, reject) => {
-  if (1 === 1) {
+  if (1 === 11) {
     resolve("Resolved");
   } else {
     reject("Rejected");
@@ -74,9 +74,25 @@ Promise.all([promise, promise2])
   })
   .catch(() => {});
 
-// Promise.any() is similar pero no espera que se resuelven todas, sino las suelta una por una
+// Promise.any() is similar pero no espera que se resuelven todas, sino retorna la primera que se resuelve con exito. Las de mas se ignoran.
 Promise.any([promise, promise2])
   .then((res) => {
     console.log(res);
   })
   .catch(() => {});
+
+// Promise.allSettled() recibe array y retorna todas las promesas da igual si estan resuelt o reject. Devuelve un array.
+Promise.allSettled([promise, promise2])
+  .then((res) => {
+    console.log(res);
+  })
+  .catch(() => {});
+
+// Retorna la primera que se ha o resuelto o rechasado, Osea setlled.
+Promise.race([promise, promise2])
+  .then((res) => {
+    console.log("Race resolved:", res);
+  })
+  .catch((err) => {
+    console.log("Race rejected:", err);
+  });
