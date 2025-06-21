@@ -29,7 +29,7 @@ promise
 
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        console.log("FInished waiting");
+        console.log("Finished waiting");
         resolve("Inner promise");
       }, 2000);
     });
@@ -39,3 +39,44 @@ promise
     throw new Error();
   })
   .catch((err) => console.log("error"));
+
+// Se puede rethrow/return Error from the .catch() para manejar rl mismo mas tarde en el proximo catch() que aparezca en la cadena
+//  .finaly() no procesa ni value ni error, lo pasa al siguiente .then() o .catch()...
+// Also this is promise chaining - calling .then() multiple times on one promise
+
+const promise2 = new Promise((resolve, reject) => {
+  if (1 === 1) {
+    resolve("Resolved");
+  } else {
+    reject("Rejected");
+  }
+});
+
+promise2
+  .catch((err) => {
+    throw err; // rethrow error
+  })
+  .then(() => {})
+  .then(() => {})
+  .then(() => {})
+  .finally(() => {}) // pass all
+  .catch((errrr) => {
+    console.log("Error at the end: ", errrr);
+  });
+
+// Handling Multiple Promises and JS methods for that.
+
+// Promise.all([promises]) recibe un array de todas las promesas que tiene dentro. Espera que se reselven todas. Si todas son resolved, se retorna un array con todos los valores retornados. Si hay un error, todos fallan.
+
+Promise.all([promise, promise2])
+  .then((res) => {
+    console.log(res);
+  })
+  .catch(() => {});
+
+// Promise.any() is similar pero no espera que se resuelven todas, sino las suelta una por una
+Promise.any([promise, promise2])
+  .then((res) => {
+    console.log(res);
+  })
+  .catch(() => {});
