@@ -145,9 +145,35 @@ const deleteRequest = new Request(
 async function fetcherFunct(requestType) {
   try {
     const res = await fetch(requestType);
-    const data = res.json();
+    const data = await res.json();
     console.log(data);
   } catch (error) {
     console.error(error);
   }
 }
+
+// ----
+// Handling errors
+async function fetchAllPosts() {
+  const URL_API = "https://jsonplaceholder.typicode.com/users";
+
+  try {
+    const res = await fetch(URL_API);
+    // from here
+    if (!res.ok) {
+      throw new Error(`Shit happens sometimes... ${res.status}`);
+    }
+    const contentType = res.headers.get("content-type");
+    if (!contentType || !contentType.includes("application/json")) {
+      throw new TypeError("Upsa, not a JSON file");
+    }
+    // to here
+    const data = await res.json();
+    console.log(data);
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+// Canceling the request
+// You can not cancel Promisse but you can cancel what promise do, like FETCH() - or basicly, if fetch does streaming or downloading, then we can cancel that download or stream
