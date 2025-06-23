@@ -120,4 +120,34 @@ async function createPost(ID) {
 }
 
 // ------
-// Custom Headers
+// Custom Headers are shitload of headers that goes to headers part of configuration objects that is sent with fetch API.
+
+// Creating a Request Object - Usefull if we want to have one fetch async function that can serve all fetch request of diferent types
+
+const postRequest = new Request("https://jsonplaceholder.typicode.com/posts/", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    id: crypto.randomUUID(),
+    title: "How to post something",
+  }),
+});
+
+const deleteRequest = new Request(
+  "https://jsonplaceholder.typicode.com/posts/45fsd5f4s6df54sd5",
+  {
+    method: "DELETE",
+  }
+);
+
+async function fetcherFunct(requestType) {
+  try {
+    const res = await fetch(requestType);
+    const data = res.json();
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
