@@ -177,3 +177,139 @@ async function fetchAllPosts() {
 
 // Canceling the request
 // You can not cancel Promisse but you can cancel what promise do, like FETCH() - or basicly, if fetch does streaming or downloading, then we can cancel that download or stream
+
+// TASKS PRACTICE
+
+async function userList() {
+  const res = await fetch(
+    "https://jsonplaceholder.typicode.com/posts?userId=1"
+  );
+  const data = await res.json();
+  data.forEach((post) => console.log(post.title));
+}
+// userList();
+
+// ----
+
+const postData = async () => {
+  const conf = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      title: "King",
+      body: "Fuck this",
+      id: crypto.randomUUID(),
+    }),
+  };
+
+  try {
+    const res = await fetch("https://jsonplaceholder.typicode.com/posts", conf);
+    const data = await res.json();
+    console.log(data);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+// postData();
+
+async function putData() {
+  const conf = {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      title: "King of PUT",
+      body: "Fuck, this is boring",
+    }),
+  };
+
+  try {
+    const res = await fetch(
+      "https://jsonplaceholder.typicode.com/posts/1",
+      conf
+    );
+    const data = await res.json();
+    console.log(data);
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+// patchData();
+
+async function patchData() {
+  const conf = {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      title: "King of PUT-PATCH",
+    }),
+  };
+
+  try {
+    const res = await fetch(
+      "https://jsonplaceholder.typicode.com/posts/1",
+      conf
+    );
+    const data = await res.json();
+    console.log(data);
+  } catch (err) {
+    console.log(err);
+  }
+}
+// patchData();
+
+// deleteData
+async function deleteData() {
+  const conf = {
+    method: "DELETE",
+  };
+
+  try {
+    const res = await fetch(
+      "https://jsonplaceholder.typicode.com/posts/1",
+      conf
+    );
+    const data = await res.json();
+    console.log(data);
+  } catch (err) {
+    console.log(err);
+  }
+}
+// deleteData();
+
+async function fetcherinko(url, options) {
+  try {
+    const res = await fetch(url, options);
+    const data = await res.json();
+    console.log(data);
+  } catch (err) {
+    console.log(err);
+  }
+}
+const users = {
+  url: "https://jsonplaceholder.typicode.com/users",
+  options: {},
+};
+const post = {
+  url: "https://jsonplaceholder.typicode.com/posts",
+  options: {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      title: "King",
+      body: "Fuck this",
+      id: crypto.randomUUID(),
+    }),
+  },
+};
+// fetcherinko(users.url);
+// fetcherinko(post.url, post.options);
