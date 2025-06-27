@@ -91,4 +91,44 @@ user1.great();
 const sasa = User.createUSer("Sasa", "sasa@sasasa.com");
 sasa.great();
 
+// BIG ONE SINCE 2022 PRIVATE PROPERTIES IN JS CLASSES
 // Private properties
+class WashMachine {
+  _year = 66; // THIS IS JUST A CONVENTION WAY OF TYPING PROPERTY WHEN USING GET & SET, NOT A REAL PRIVATE PROPERTY.
+  brand; // regular property (brand = null, or declare it with the value)
+  // Private propertie
+  #powerStatus = false;
+
+  constructor(brand) {
+    this.brand = brand;
+  }
+
+  // Regular method
+  start(cycle) {
+    if (!this.#powerStatus) {
+      this.#turnOn(console.log("Turn On"));
+    }
+    this.#powerStatus = true;
+    this.#spin(console.log("spin"));
+    this.#drain(console.log("drain"));
+    this.#dry(console.log("dry"));
+    this.stop(console.log("stop"));
+  }
+  // Regular method
+  stop() {
+    this.#turnOff(console.log("Turn OFF"));
+  }
+
+  // Private methods
+  #spin() {}
+  #drain() {}
+  #dry() {}
+  #turnOff() {}
+  #turnOn() {}
+}
+
+const bosch = new WashMachine("Bosch");
+bosch.start();
+bosch.stop();
+// bosch.#spin(); DOES NOT WORK
+// bosch.#powerStatus; DOES NOT WORK
