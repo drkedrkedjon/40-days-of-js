@@ -132,3 +132,25 @@ bosch.start();
 bosch.stop();
 // bosch.#spin(); DOES NOT WORK
 // bosch.#powerStatus; DOES NOT WORK
+
+// Extending class.
+// We have to add constructor only if we are creating more dynamic properties, if not no need for constructor. Also, must use super() to copy from parent and (write it all down as arguments)
+// We can overwrite the method name from parent class and thats fine, it will have new child method (inside child class) original will be not modified. So, method print() from parent clas wil be overwriten by print() method from child class without modifaing it in parent class. Polymorphism perhaps...?
+class TurboMachine extends WashMachine {
+  constructor(brand, newShit) {
+    // brand is old, copy it and newShit is new.
+    super(brand);
+    this.newShit = newShit;
+  }
+
+  print() {
+    console.log(this.brand, `Is washing washwer shit: ${this.newShit}`);
+  }
+}
+
+const heee = new TurboMachine("KONCAR", "NewSHITIIII");
+heee.print();
+heee.start();
+console.log(heee._year);
+
+//
