@@ -66,4 +66,29 @@ ones.carType = "Banana";
 ones.printModel();
 twos.printModel();
 
-//
+// Static properties
+
+class User {
+  constructor(name, email) {
+    this.name = name;
+    this.email = email;
+  }
+
+  great() {
+    console.log(`Hello I'm ${this.name}`);
+  }
+
+  // Create static method to create user, but not to pass it down to new instances of objects. Yet keep it inside of the Class itself so no external function is needed...
+  static createUSer(name, email) {
+    return new User(name, email);
+  }
+}
+
+const user1 = new User("Sasha");
+user1.great();
+
+// So I can call creation of new user as method on the Class itself.
+const sasa = User.createUSer("Sasa", "sasa@sasasa.com");
+sasa.great();
+
+// Private properties
