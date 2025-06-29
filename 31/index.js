@@ -48,3 +48,4 @@ class superCar extends Cars {
 const mujo = new superCar("RR", 2014, "Mujo");
 
 console.log(mujo);
+console.log(Object.getPrototypeOf(mujo));
