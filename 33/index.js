@@ -54,3 +54,40 @@ entries.forEach((element) => {
 });
 
 // Loop over Map
+
+// VALUE, KEY
+funMap.forEach((value, key) =>
+  console.log(`Key ${key}, with folowing ${value} value.`)
+);
+
+// KEY, VALUE
+for (const [key, value] of funMap) {
+  console.log(`Key ${key}, with folowing ${value} value.`);
+}
+
+// Conversion from MAP to objects and arrays
+const address = {
+  Tapas: "Bangalore",
+  James: "Hjuston",
+  Selva: "Srilanca",
+};
+
+// Object to Map
+const mapFromObject = new Map(Object.entries(address));
+console.log(mapFromObject);
+
+// Map to Object
+const objectFromMap = Object.fromEntries(mapFromObject);
+console.log(objectFromMap);
+
+// Mat to an Array
+console.log(Array.from(funMap));
+console.log([...funMap]);
+
+// Map vs. object
+// If you need the key to be something else then string
+// If you need items to be ordered always
+// Have more methods to manipulate and extract data from Map
+// If you do not need any of those, use object.
+
+// NOW TO SET
