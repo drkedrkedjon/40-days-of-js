@@ -90,4 +90,62 @@ console.log([...funMap]);
 // Have more methods to manipulate and extract data from Map
 // If you do not need any of those, use object.
 
+// -----------------------------------------------
+
 // NOW TO SET
+// SET is a colecton of unique elements, eny elements - most important
+// In a sence it is similar to array pero su prototipo es Object
+// Cuando se crea se le puede pasar los elementos /
+
+const mySet = new Set([true, {}, [], "Sasa"]);
+console.log(mySet);
+
+// Tiene los mismos metodos como Map
+console.log(mySet.size);
+mySet.add("Pinga", "Papa");
+
+console.log(mySet);
+
+// No se pueden anadir los elementos duplicados
+mySet.add(true); // No pasara nada, no se anadira el segundo true.
+
+console.log(mySet.has(true));
+console.log(mySet.has(false));
+mySet.delete(true);
+mySet.clear();
+console.log(mySet);
+
+// Itrate ower set()
+const houseNum = new Set([123, 234, 564]).values();
+console.log(houseNum);
+houseNum.forEach((val) => {
+  console.log(val);
+});
+
+// Use Set ower array if you need to have colection of unique elements. Also some methods like delete() are much faster then Splice, Slice and so on...
+
+// Convertion - Set to array - use spread operator
+const convert = [...houseNum];
+console.log(convert);
+
+// Array to Set
+const numbeeers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 9, 9, 5, 5, 5, 3, 3, 3, 4];
+const noDup = new Set(numbeeers);
+console.log([...noDup]);
+
+// Union, intersection y diference methods on Set - cool
+const first = new Set([1, 2, 3]);
+const second = new Set([3, 4, 5]);
+
+const union = first.union(second);
+const intersect = first.intersection(second);
+const difference = first.difference(second);
+console.log(union);
+console.log(intersect);
+console.log(difference);
+
+// Superset
+const first1 = new Set([1, 2, 3, 4, 5, 6, 7, 8, 9]);
+const second1 = new Set([3, 4, 5]);
+
+console.log(first1.isSupersetOf(second1));
